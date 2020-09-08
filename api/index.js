@@ -1,23 +1,25 @@
-import config from 'dotenv';
-import express from 'express';
-import bodyParser from 'body-parser';
-import bookRoutes from './server/routes/BookRoutes';
+import config from "dotenv";
+import express from "express";
+import bodyParser from "body-parser";
+import bookRoutes from "./server/routes/BookRoutes";
 
 config.config();
 
 const app = express();
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 const port = process.env.PORT || 8000;
 
-app.use('/api/v1/books', bookRoutes);
+app.use("/api/v1/books", bookRoutes);
 
 // when a random route is inputted
-app.get('*', (req, res) => res.status(200).send({
-    message: 'Welcome to this api'
-}));
+app.get("*", (req, res) =>
+  res.status(200).send({
+    message: "Welcome to this api",
+  })
+);
 
 app.listen(port, () => console.log(`Server is running on PORT: ${port}`));
 
